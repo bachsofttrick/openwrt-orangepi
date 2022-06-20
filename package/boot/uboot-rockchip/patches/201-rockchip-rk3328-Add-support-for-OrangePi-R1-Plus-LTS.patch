@@ -1,21 +1,21 @@
-From e8165bf54aaece6b6eb2d5d95d588cceb4adda03 Mon Sep 17 00:00:00 2001
+From 7b94125b569a3086a4b08ffd7e6cf60202b111ab Mon Sep 17 00:00:00 2001
 From: baiywt <baiywt_gj@163.com>
 Date: Thu, 25 Nov 2021 20:59:16 +0800
-Subject: [PATCH] Add support for OrangePi R1 Plus LTS
+Subject: [PATCH 201/203] Add support for OrangePi R1 Plus LTS
 
 ---
  arch/arm/dts/Makefile                         |  1 +
- arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts  |  7 ++
- configs/orangepi-r1-plus-lts-rk3328_defconfig | 98 +++++++++++++++++++
- 3 files changed, 106 insertions(+)
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts  | 36 +++++++
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 99 +++++++++++++++++++
+ 3 files changed, 136 insertions(+)
  create mode 100644 arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
  create mode 100644 configs/orangepi-r1-plus-lts-rk3328_defconfig
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index d35d0990..d02ff131 100644
+index adfe6c3ffd..3d4e0f59d9 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -112,6 +112,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3328) += \
+@@ -110,6 +110,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3328) += \
  	rk3328-evb.dtb \
  	rk3328-nanopi-r2s.dtb \
  	rk3328-orangepi-r1-plus.dtb \
@@ -25,10 +25,10 @@ index d35d0990..d02ff131 100644
  	rk3328-rock-pi-e.dtb
 diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts b/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
 new file mode 100644
-index 00000000..5b7d97a0
+index 0000000000..df3cb565a8
 --- /dev/null
 +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,36 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +#include "rk3328-orangepi-r1-plus.dts"
 +
@@ -36,12 +36,41 @@ index 00000000..5b7d97a0
 +	model = "Xunlong Orange Pi R1 Plus LTS";
 +	compatible = "xunlong,orangepi-r1-plus-lts", "rockchip,rk3328";
 +};
++
++&sdmmc {
++        bus-width = <4>;
++        cap-sd-highspeed;
++        disable-wp;
++        pinctrl-0 = <&sdmmc0_clk>, <&sdmmc0_cmd>, <&sdmmc0_dectn>, <&sdmmc0_bus4>;
++        pinctrl-names = "default";
++        sd-uhs-sdr12;
++        sd-uhs-sdr25;
++        sd-uhs-sdr50;
++        sd-uhs-sdr104;
++        vmmc-supply = <&vcc_sd>;
++        vqmmc-supply = <&vcc_io_sdio>;
++        status = "okay";
++};
++
++&sys_led {
++       label = "orangepi-r1-plus-lts:red:sys";
++};
++
++&wan_led {
++       label = "orangepi-r1-plus-lts:green:wan";
++};
++
++&lan_led {
++       label = "orangepi-r1-plus-lts:green:lan";
++
++};
++
 diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
 new file mode 100644
-index 00000000..3cb3b5c3
+index 0000000000..f299c7a8a8
 --- /dev/null
 +++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-@@ -0,0 +1,98 @@
+@@ -0,0 +1,99 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_ROCKCHIP=y
 +CONFIG_SYS_TEXT_BASE=0x00200000
@@ -67,6 +96,7 @@ index 00000000..3cb3b5c3
 +CONFIG_MISC_INIT_R=y
 +# CONFIG_DISPLAY_CPUINFO is not set
 +CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_BOARD_INIT=y
 +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 +CONFIG_TPL_SYS_MALLOC_SIMPLE=y
 +CONFIG_SPL_STACK_R=y

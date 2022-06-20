@@ -32,7 +32,7 @@ define U-Boot/orangepi-r1-plus-rk3328
   DEPENDS:=+PACKAGE_u-boot-orangepi-r1-plus-rk3328:arm-trusted-firmware-rockchip
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
   ATF:=rk3328_bl31.elf
-  OF_PLATDATA:=$(1)
+  #OF_PLATDATA:=$(1)
 endef
 
 define U-Boot/orangepi-r1-plus-lts-rk3328
@@ -43,7 +43,29 @@ define U-Boot/orangepi-r1-plus-lts-rk3328
   DEPENDS:=+PACKAGE_u-boot-orangepi-r1-plus-lts-rk3328:arm-trusted-firmware-rockchip
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
   ATF:=rk3328_bl31.elf
-  OF_PLATDATA:=$(1)
+  #OF_PLATDATA:=$(1)
+endef
+
+define U-Boot/orangepi-r1-plus-rk3328-spi
+  BUILD_SUBTARGET:=armv8
+  NAME:=OrangePi R1 Plus SPI
+  BUILD_DEVICES:= \
+    xunlong_orangepi-r1-plus-spi
+  DEPENDS:=+PACKAGE_u-boot-orangepi-r1-plus-rk3328-spi:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3328_bl31.elf
+  #OF_PLATDATA:=$(1)
+endef
+
+define U-Boot/orangepi-r1-plus-lts-rk3328-spi
+  BUILD_SUBTARGET:=armv8
+  NAME:=OrangePi R1 Plus LTS SPI
+  BUILD_DEVICES:= \
+    xunlong_orangepi-r1-plus-lts-spi
+  DEPENDS:=+PACKAGE_u-boot-orangepi-r1-plus-lts-rk3328-spi:arm-trusted-firmware-rockchip
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
+  ATF:=rk3328_bl31.elf
+  #OF_PLATDATA:=$(1)
 endef
 
 define U-Boot/nanopi-r2s-rk3328
@@ -54,7 +76,7 @@ define U-Boot/nanopi-r2s-rk3328
   DEPENDS:=+PACKAGE_u-boot-nanopi-r2s-rk3328:arm-trusted-firmware-rockchip
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip
   ATF:=rk3328_bl31.elf
-  OF_PLATDATA:=$(1)
+  #OF_PLATDATA:=$(1)
 endef
 
 
@@ -96,7 +118,9 @@ UBOOT_TARGETS := \
   rockpro64-rk3399 \
   nanopi-r2s-rk3328 \
   orangepi-r1-plus-rk3328 \
-  orangepi-r1-plus-lts-rk3328
+  orangepi-r1-plus-lts-rk3328 \
+  orangepi-r1-plus-rk3328-spi \
+  orangepi-r1-plus-lts-rk3328-spi
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 

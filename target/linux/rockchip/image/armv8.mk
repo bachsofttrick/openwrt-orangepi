@@ -22,6 +22,52 @@ define Device/xunlong_orangepi-r1-plus-lts
 endef
 TARGET_DEVICES += xunlong_orangepi-r1-plus-lts
 
+define Device/xunlong_orangepi-r1-plus-spi
+  DEVICE_VENDOR := Xunlong
+  DEVICE_MODEL := OrangePi R1 Plus for Spi Boot
+  SOC := rk3328
+  UBOOT_DEVICE_NAME := orangepi-r1-plus-rk3328-spi
+  KERNEL_LOADADDR = 0x02080000
+  KERNEL := kernel-bin | lzma | uImage lzma
+  IMAGES := sysupgrade.bin uboot.bin dtb.bin firmware.bin
+  UBOOT_SIZE := 1152k
+  DTB_SIZE := 64k
+  FIRMWARE_SIZE := 15168k
+  IMAGE_SIZE := 16384k
+  BLOCK_SIZE := 4k
+  IMAGE/sysupgrade.bin := pine64-img-spi | pad-to $$$$(UBOOT_SIZE) | append-dtb | pad-to $$$$(DTB_SIZE) \
+	  | append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
+  IMAGE/uboot.bin := pine64-img-spi | pad-to $$$$(BLOCK_SIZE)
+  IMAGE/dtb.bin := append-dtb | pad-to $$$$(BLOCK_SIZE)
+  IMAGE/firmware.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size $$$$(FIRMWARE_SIZE)
+  DEVICE_PACKAGES := kmod-usb-net-rtl8152
+endef
+
+TARGET_DEVICES += xunlong_orangepi-r1-plus-spi
+
+define Device/xunlong_orangepi-r1-plus-lts-spi
+  DEVICE_VENDOR := Xunlong
+  DEVICE_MODEL := OrangePi R1 Plus LTS for Spi Boot
+  SOC := rk3328
+  UBOOT_DEVICE_NAME := orangepi-r1-plus-lts-rk3328-spi
+  KERNEL_LOADADDR = 0x02080000
+  KERNEL = kernel-bin | lzma | uImage lzma
+  IMAGES = sysupgrade.bin uboot.bin dtb.bin firmware.bin
+  UBOOT_SIZE := 1152k
+  DTB_SIZE := 64k
+  FIRMWARE_SIZE := 15168k
+  IMAGE_SIZE := 16384k
+  BLOCK_SIZE := 4k
+  IMAGE/sysupgrade.bin := pine64-img-spi | pad-to $$$$(UBOOT_SIZE) | append-dtb | pad-to $$$$(DTB_SIZE) \
+	  | append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
+  IMAGE/uboot.bin := pine64-img-spi | pad-to $$$$(BLOCK_SIZE)
+  IMAGE/dtb.bin := append-dtb | pad-to $$$$(BLOCK_SIZE)
+  IMAGE/firmware.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size $$$$(FIRMWARE_SIZE)
+  DEVICE_PACKAGES := kmod-usb-net-rtl8152
+endef
+
+TARGET_DEVICES += xunlong_orangepi-r1-plus-lts-spi
+
 define Device/friendlyarm_nanopi-r2s
   DEVICE_VENDOR := FriendlyARM
   DEVICE_MODEL := NanoPi R2S
