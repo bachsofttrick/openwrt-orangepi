@@ -80,13 +80,13 @@ DEFAULT_PACKAGES.tweak:=\
 	luci-lib-base \
 	luci-lib-fs \
 	luci-lib-ipkg \
-  luci-app-adblock \
-  atop \
-  htop \
-  iperf3 \
-  bmon \
-  nano \
-  usbutils \
+	luci-app-adblock \
+	atop \
+	htop \
+	iperf3 \
+	bmon \
+	nano \
+	usbutils \
 
 ifneq ($(DUMP),)
   all: dumpinfo
