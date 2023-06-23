@@ -18,7 +18,10 @@ define Device/xunlong_orangepi-r1-plus-lts
   SOC := rk3328
   UBOOT_DEVICE_NAME := orangepi-r1-plus-lts-rk3328
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r2s | pine64-img | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-usb-net-rtl8152
+  DEVICE_PACKAGES := kmod-usb-net-rtl8152 \
+  kmod-usb-net-rndis kmod-usb-storage kmod-usb-storage-extras kmod-fs-exfat kmod-fs-ntfs3 \
+  kmod-fs-vfat \
+  
 endef
 TARGET_DEVICES += xunlong_orangepi-r1-plus-lts
 
